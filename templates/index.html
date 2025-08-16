@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>🖥️ CLAUDTEC - TECNOLOGIA E INOVAÇÃO</title>
+    <style>
+        body {
+            background: #f1f3f6;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 40px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 12px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .botao-download {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        .botao-download:hover {
+            background-color: #2c80b4;
+        }
+        img {
+            margin-top: 10px;
+            max-height: 150px;
+        }
+        input, textarea {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            width: 60%;
+        }
+        button {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖥️ CLAUDTEC - TECNOLOGIA E INOVAÇÃO</h1>
+
+    <h2>📤 Enviar Arquivo</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="text" name="nome" placeholder="Seu nome" required><br>
+        <input type="text" name="contacto" placeholder="Contacto ou e-mail" required><br>
+        <textarea name="comentario" rows="3" placeholder="Comentário opcional..."></textarea><br>
+        <input type="file" name="arquivo" required><br>
+        <button type="submit">📤 Enviar Arquivo</button>
+    </form>
+
+    <h2>📂 Arquivos disponíveis para download</h2>
+    <ul>
+        {% for arquivo in arquivos %}
+            <li>
+                <span>{{ arquivo }}</span>
+                <a class="botao-download" href="/download/{{ arquivo }}">⬇️ Baixar</a>
+                {% if arquivo.endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                    <img src="/preview/{{ arquivo }}" alt="{{ arquivo }}">
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>🤖 CLAUDBOT</h2>
+    <form action="/" method="post">
+        <input type="text" name="mensagem" placeholder="Faça uma pergunta..." required>
+        <button type="submit">🔍 Perguntar</button>
+    </form>
+    <div style="margin-top:20px; font-weight:bold;">{{ resposta }}</div>
+</body>
+</html>
